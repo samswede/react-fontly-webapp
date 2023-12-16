@@ -1,5 +1,6 @@
 import styles from './HomePage.module.css';
 
+import React from "react";
 import { Navbar, 
         NavbarBrand, 
         NavbarContent, 
@@ -7,6 +8,9 @@ import { Navbar,
         
         Link, 
         Button, 
+
+        Select,
+        SelectItem,
         
         Image } from '@nextui-org/react'
 
@@ -59,7 +63,18 @@ export default function HomePage() {
             {/* App starts here */}
             <main className={styles.secondContainer}>
                 <div className={styles.searchContainer}>
-                    <input className={styles.searchBar} type="text" placeholder="Search for a paper"/>
+                <Select
+                    label="Select a font"
+                    placeholder="sans-serif"
+                    className="max-w-xs"
+                    >
+                    <SelectItem>font style 1</SelectItem>
+                    <SelectItem>font style 2</SelectItem>
+                    <SelectItem>font style 3</SelectItem>
+                    <SelectItem>font style 4</SelectItem>
+                    <SelectItem>font style 5</SelectItem>
+                    <SelectItem>font style 6</SelectItem>
+                </Select>
                 </div>
                 <div className={styles.fontMapContainer}>
                     <Image 
