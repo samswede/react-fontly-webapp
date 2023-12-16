@@ -1,8 +1,20 @@
 import styles from './HomePage.module.css';
 
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Image } from '@nextui-org/react'
+import { Navbar, 
+        NavbarBrand, 
+        NavbarContent, 
+        NavbarItem, 
+        
+        Link, 
+        Button, 
+        
+        Image } from '@nextui-org/react'
+
+
 
 import Favicon from '../../assets/favicon.jpg';
+import FontMapImage from './connected_papers_graph.png'
+
 
 export default function HomePage() {
     return (
@@ -45,6 +57,20 @@ export default function HomePage() {
             </Navbar>
 
             {/* App starts here */}
+            <main className={styles.secondContainer}>
+                <div className={styles.searchContainer}>
+                    <input className={styles.searchBar} type="text" placeholder="Search for a paper"/>
+                </div>
+                <div className={styles.fontMapContainer}>
+                    <Image 
+                        src={FontMapImage} 
+                        
+                        />
+                </div>
+                <div className={styles.carouselContainer}>
+
+                </div>
+            </main>
 
         </main>
       
