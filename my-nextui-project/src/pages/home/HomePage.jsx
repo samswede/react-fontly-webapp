@@ -2,6 +2,7 @@ import styles from './HomePage.module.css';
 
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Image } from '@nextui-org/react'
 
+import Favicon from '../../assets/favicon.jpg';
 
 export default function HomePage() {
     return (
@@ -15,20 +16,20 @@ export default function HomePage() {
                 </NavbarBrand>
 
                 <NavbarContent >
-                    <NavbarItem isActive>
+                    <NavbarItem>
                         <Link 
                             href="/about"
-                            aria-current="about">
+                            aria-current="about"
+                            color="foreground">
                             About
                         </Link>
                     </NavbarItem>
 
-                    <NavbarItem>
+                    <NavbarItem isActive>
                         <Link 
-                            href="/portfolio"
-                            aria-current="portolio"
-                            color="foreground">
-                            Porfolio
+                            href="/home"
+                            aria-current="about">
+                            Home
                         </Link>
                     </NavbarItem>
                     
@@ -36,15 +37,15 @@ export default function HomePage() {
 
                 <NavbarContent justify="end">
                     <NavbarItem>
-                    <Button as={Link} color="warning" href="/contact" variant="flat">
-                        Contact
+                    <Button as={Link} color="primary" href="/login" variant="flat">
+                        Login
                     </Button>
                     </NavbarItem>
                 </NavbarContent>
             </Navbar>
 
             {/* App starts here */}
-            
+
         </main>
       
     </div>
