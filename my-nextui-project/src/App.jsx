@@ -6,7 +6,7 @@ import {BrowserRouter as Router,
 import {NextUIProvider} from '@nextui-org/react';
 
 // Import all pages
-import HomePage from './pages/HomePage';
+import HomePage from './pages/home/HomePage';
 //import Page1 from './pages/1/Page1';
 
 
