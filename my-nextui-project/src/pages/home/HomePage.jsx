@@ -8,13 +8,10 @@ import { Navbar,
         
         Link, 
         Button, 
-
-        Select,
-        SelectItem,
         
         Image } from '@nextui-org/react'
 
-
+import SearchBar from '../../base/search/SearchBar';
 
 import Favicon from '../../assets/favicon.jpg';
 import FontMapImage from './connected_papers_graph.png'
@@ -63,18 +60,7 @@ export default function HomePage() {
             {/* App starts here */}
             <main className={styles.secondContainer}>
                 <div className={styles.searchContainer}>
-                <Select
-                    label="Select a font"
-                    placeholder="sans-serif"
-                    className="max-w-xs"
-                    >
-                    <SelectItem>font style 1</SelectItem>
-                    <SelectItem>font style 2</SelectItem>
-                    <SelectItem>font style 3</SelectItem>
-                    <SelectItem>font style 4</SelectItem>
-                    <SelectItem>font style 5</SelectItem>
-                    <SelectItem>font style 6</SelectItem>
-                </Select>
+                    <SearchBar />
                 </div>
                 <div className={styles.fontMapContainer}>
                     <Image 

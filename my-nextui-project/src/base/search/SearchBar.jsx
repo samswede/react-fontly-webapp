@@ -11,7 +11,7 @@ export default function SearchBar() {
     return (
         <Select
             label="Select a font"
-            placeholder="sans-serif"
+
             className="max-w-xs"
             selectedKeys={value}
             onSelectionChange={setValue}
