@@ -17,6 +17,7 @@ export default function FontMap({font, setFont}) {
             "fixed": {"x": true, "y": True},  # Set the x and y coordinates as fixed
         },
     */
+   
     const imagesBasePath = '/fonts/some_font_images/'
 
     const fonts = [
