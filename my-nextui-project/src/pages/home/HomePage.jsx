@@ -12,6 +12,7 @@ import { Navbar,
         Image } from '@nextui-org/react'
 
 import SearchBar from '../../base/search/SearchBar';
+import FontMap from './font_map/FontMap';
 
 import Favicon from '../../assets/favicon.jpg';
 import FontMapImage from './connected_papers_graph.png'
@@ -63,10 +64,13 @@ export default function HomePage() {
                     <SearchBar />
                 </div>
                 <div className={styles.fontMapContainer}>
+                    {/*}
                     <Image 
                         src={FontMapImage} 
                         
                         />
+                    */}
+                    <FontMap />
                 </div>
                 <div className={styles.carouselContainer}>
 
