@@ -43,7 +43,7 @@ export default function FontMap({font, setFont}) {
             "label": 'Abel',
             "shape": "circularImage",  // Specify the shape of the node as a circular image
             "image": imagesBasePath+'Abel'+'_Aa.png',  // Fetch the image path for the label
-            "x": 100,  // Specify the x-coordinate of the node
+            "x": 300,  // Specify the x-coordinate of the node
             "y": 0,  // Specify the y-coordinate of the node
             "fixed": {"x": true, "y": true},  // Set the x and y coordinates as fixed
         },
@@ -61,8 +61,8 @@ export default function FontMap({font, setFont}) {
             "label": 'Aboreto',
             "shape": "circularImage",  // Specify the shape of the node as a circular image
             "image": imagesBasePath+'Aboreto'+'_Aa.png',  // Fetch the image path for the label
-            "x": 0,  // Specify the x-coordinate of the node
-            "y": 100,  // Specify the y-coordinate of the node
+            "x": 300,  // Specify the x-coordinate of the node
+            "y": 1000,  // Specify the y-coordinate of the node
             "fixed": {"x": true, "y": true},  // Set the x and y coordinates as fixed
         },
     ]
@@ -73,26 +73,35 @@ export default function FontMap({font, setFont}) {
         { from: 0, to: 3 },
     ]
     
-    
+    let network;
     const networkRef = useRef(null);
 
     useEffect(() => {
         if (networkRef.current) {
-            const network = new Network(networkRef.current, { nodes, edges }, {});
+            network = new Network(networkRef.current, { nodes, edges }, {});
 
             // Add event listener for node click
             network.on("click", function (params) {
+                console.log("Clicked a node");
                 if (params.nodes.length > 0) {
                     const nodeId = params.nodes[0]; // Get the ID of the clicked node
-                    console.log("Clicked node ID:", nodeId); // Log the node ID
+                    
                     setFont(nodeId); // Update the font state in the parent component with the node ID
+                    console.log("setFont:", nodeId); // Log the node ID
+                    
                 }
             });
         }
     }, [nodes, edges, setFont]); // include setFont in the dependency array
 
+    /*
+    useEffect(() => {
+        if (font !== null && network) {
+            network.focus(font, { animation: true });
+        }
+    }, [font]); // Dependency array with font, to re-run when font changes
 
-
+    */
 
     return (
     <div ref={networkRef} style={{ width: '100%', height: '100%' }}>
