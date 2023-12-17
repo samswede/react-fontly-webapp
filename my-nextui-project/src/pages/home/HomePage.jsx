@@ -19,6 +19,9 @@ import FontMapImage from './connected_papers_graph.png'
 
 
 export default function HomePage() {
+    //const [font, setFont] = React.useState(new Set([]));
+    const [font, setFont] = React.useState(null);
+
     return (
         <div className="dark text-foreground bg-background">
         <main className={styles.mainContainer}>
@@ -61,7 +64,11 @@ export default function HomePage() {
             {/* App starts here */}
             <main className={styles.secondContainer}>
                 <div className={styles.searchContainer}>
-                    <SearchBar />
+                    {/* 
+                    <SearchBar 
+                        value={font}
+                        setValue={setFont}/>
+                    */}
                 </div>
                 <div className={styles.fontMapContainer}>
                     {/*}
@@ -70,7 +77,9 @@ export default function HomePage() {
                         
                         />
                     */}
-                    <FontMap />
+                    <FontMap 
+                        font={font}
+                        setFont={setFont}/>
                 </div>
                 <div className={styles.carouselContainer}>
 

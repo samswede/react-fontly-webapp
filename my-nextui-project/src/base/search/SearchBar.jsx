@@ -6,22 +6,32 @@ import {
         SelectItem} from '@nextui-org/react'
 
 
-export default function SearchBar() {
-    const [value, setValue] = React.useState(new Set([]));
+export default function SearchBar({value, setValue}) {
+    const handleSelectionChange = (newValue) => {
+        console.log("Selected Font ID:", newValue); // Log the new selection
+        setValue(newValue); // Update the state with the new value
+    };
     return (
         <Select
             label="Select a font"
 
             className="max-w-xs"
             selectedKeys={value}
-            onSelectionChange={setValue}
+            onSelectionChange={handleSelectionChange}
             >
-            <SelectItem>font style 1</SelectItem>
-            <SelectItem>font style 2</SelectItem>
-            <SelectItem>font style 3</SelectItem>
-            <SelectItem>font style 4</SelectItem>
-            <SelectItem>font style 5</SelectItem>
-            <SelectItem>font style 6</SelectItem>
+            <SelectItem 
+                //value={0}
+                >ABeeZee</SelectItem>
+            <SelectItem
+                //value={1}
+                >Abel</SelectItem>
+            <SelectItem
+                //value={2}
+                >Abhaya-Libre</SelectItem>
+            <SelectItem
+                //value={3}
+                >Aboreto</SelectItem>
+
         </Select>
                 
     );

@@ -5,7 +5,7 @@ import { Network } from 'vis-network';
 
 //import FontImage from '../../../../public/fonts/some_font_images/ABeeZee_Aa.png'
 
-export default function FontMap() {
+export default function FontMap({font, setFont}) {
 
     /* 
             "id": i, 
@@ -73,17 +73,29 @@ export default function FontMap() {
         { from: 0, to: 3 },
     ]
     
-
+    
     const networkRef = useRef(null);
 
     useEffect(() => {
         if (networkRef.current) {
             const network = new Network(networkRef.current, { nodes, edges }, {});
+
+            // Add event listener for node click
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0]; // Get the ID of the clicked node
+                    console.log("Clicked node ID:", nodeId); // Log the node ID
+                    setFont(nodeId); // Update the font state in the parent component with the node ID
+                }
+            });
         }
-    }, [nodes, edges]);
+    }, [nodes, edges, setFont]); // include setFont in the dependency array
+
+
+
 
     return (
-    <div ref={networkRef} style={{ width: '100%', height: '500px' }}>
+    <div ref={networkRef} style={{ width: '100%', height: '100%' }}>
     </div>
     )
 };
