@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const csvData = [];
 
-fs.createReadStream('./data/embeddings/cleaned_big_L9_E700.csv')
+fs.createReadStream('../../data/embeddings/font_embeddings.csv')
     .pipe(parse({
             delimiter: ',',
             columns: true // If you don't set this, the first line will be skipped and used as headers.
