@@ -11,6 +11,8 @@ import { Navbar,
         
         Image } from '@nextui-org/react'
 
+import TestONNXButton from '../../base/buttons/TestButtonONNX';
+
 import SearchBar from '../../base/search/SearchBar';
 import FontMap from './font_map/FontMap';
 
@@ -18,10 +20,26 @@ import Favicon from '../../assets/favicon.jpg';
 import FontMapImage from './connected_papers_graph.png'
 
 
+import * as onnx from 'onnxjs';
+
 export default function HomePage() {
     //const [font, setFont] = React.useState(new Set([]));
     const [font, setFont] = React.useState(null);
 
+    /*
+    try {
+        const sess = new onnx.InferenceSession();
+
+        console.log(`onnx session created...`)
+        //await sess.loadModel("../models/encoder_L12_float16.onnx");
+        const loadingModelPromise = sess.loadModel("../../../models/onnx_model.onnx");
+    
+        console.log(`model loaded`);
+    } catch (e) {
+        console.log(`error loading ONNX model: ${e}`);
+    }
+
+    */
     return (
         <div className="dark text-foreground bg-background">
         <main className={styles.mainContainer}>
@@ -83,6 +101,9 @@ export default function HomePage() {
                 </div>
                 <div className={styles.carouselContainer}>
 
+                </div>
+                <div className={styles.canvasContainer}>
+                    <TestONNXButton />
                 </div>
             </main>
 

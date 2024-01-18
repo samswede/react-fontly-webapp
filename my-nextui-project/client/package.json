@@ -13,9 +13,12 @@
     "@nextui-org/react": "^2.2.9",
     "csv-parse": "^5.5.3",
     "framer-motion": "^10.16.16",
+    "onnxjs": "^0.1.8",
+    "onnxruntime-web": "^1.16.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.0",
+    "react-sketch-canvas": "^6.2.0",
     "vis-network": "^9.1.9"
   },
   "devDependencies": {
