@@ -1,9 +1,16 @@
 import * as ort from 'onnxruntime-web';
 
+//const ort = require('onnxruntime-web');
+
 export default async function testORTWeb() {
+    const options = {
+        executionProviders: ['wasm'], 
+        graphOptimizationLevel: 'all'
+      };
+
     try {
         console.log('Creating ONNX Runtime Web session...');
-        const sess = await ort.InferenceSession.create("../models/encoder_L12_float16.onnx");
+        const sess = await ort.InferenceSession.create("../models/encoder_L12_float16.onnx", options);
 
         console.log('Model loaded');
 
