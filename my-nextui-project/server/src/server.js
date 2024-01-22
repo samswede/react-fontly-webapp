@@ -44,10 +44,12 @@ We could be loading a database, or a file, or anything else that takes time to l
 async function startServer() {
     // wait for the database to load
     
-    await mongoConnect();
+    //await mongoConnect();
 
-    await loadPlanetsData();
-    await loadLaunchData();
+    //await loadFontsData();
+
+    // wait for the model to load
+    //await loadEncoderModel();
 
     server.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}...`);
