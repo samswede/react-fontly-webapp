@@ -2,7 +2,7 @@ const express = require('express');
 
 // import the routers.
 const fontsRouter = require('./fonts/fonts.router');
-const encoderRouter = require('./encoder/encoder.router');
+//const encoderRouter = require('./encoder/encoder.router');
 
 
 // mount the routers. 
@@ -19,7 +19,7 @@ const encoderRouter = require('./encoder/encoder.router');
 const api = express.Router();
 
 api.use('/fonts', fontsRouter);
-api.use('/encoder', encoderRouter);
+//api.use('/encoder', encoderRouter);
 
 
 module.exports = api;

@@ -8,10 +8,11 @@ const app = require('./app');
 
 /*
 TO DO:
-    - import mongoConnect for connecting to vector database
-    //const { mongoConnect } = require('./services/mongo');
-
+    - modify mongo connect to connect to vector database rather than normal database
 */
+const { mongoConnect } = require('./services/mongo');
+
+
 
 
 // import models, e.g. data, ONNX models, etc.
@@ -19,10 +20,10 @@ TO DO:
 TO DO:
     - load font data to vector database (if not already loaded)
     - load ONNX model on server start
-
-    const { loadFontsData } = require('./models/fonts.model');
-    const { loadEncoderModel } = require('./models/encoder.model');
 */
+const { loadFontsData } = require('./models/fonts.model');
+//const { loadEncoderModel } = require('./models/encoder.model');
+
 
 
 
@@ -44,9 +45,9 @@ We could be loading a database, or a file, or anything else that takes time to l
 async function startServer() {
     // wait for the database to load
     
-    //await mongoConnect();
+    await mongoConnect();
 
-    //await loadFontsData();
+    await loadFontsData();
 
     // wait for the model to load
     //await loadEncoderModel();

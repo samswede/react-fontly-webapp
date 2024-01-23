@@ -15,6 +15,7 @@ function loadFontsData() {
                 const fontsData = JSON.parse(data);
                 for (const font of fontsData) {
                     await saveFont(font);
+                    //console.log(`Saved font ${font.name}`);
                 }
                 const countFontsFound = await getAllFonts();
                 console.log(`${countFontsFound.length} fonts found!`);
@@ -28,7 +29,7 @@ function loadFontsData() {
 }
 
 async function getAllFonts() {
-    return await planets.find({}, {
+    return await fonts.find({}, {
       '_id': 0, 
       '__v': 0,
     
@@ -37,17 +38,17 @@ async function getAllFonts() {
   
 async function saveFont(font) {
   try {
-    await fonts.updateOne({
-      index: font.index
-      }, 
+    await fonts.updateOne({ 
+        index: font.index }, // filter
+    {
+      $set: { // update
+        index: font.index,
+        name: font.name,
+        embedding: font.embedding
+      }
+    }, 
       {
-      name: font.name 
-      },
-      {
-        embedding: font.embedding 
-        },
-      {
-      upsert: true,
+      upsert: true, // upsert means insert if not found
       },
     )
 
