@@ -3,6 +3,8 @@ const path = require('path');
 
 const fonts = require('./fonts.mongo');  
 
+const { mongoVectorSearch } = require('../services/mongo');
+
 function loadFontsData() {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, '..', '..', 'data', 'font_collection.json'), 'utf8', async (err, data) => {
@@ -35,6 +37,32 @@ async function getAllFonts() {
     
     }); // exclude the _id and __v fields
     };
+
+async function getFontFromName(name) {
+    return await fonts.findOne({ name: name }, {
+      '_id': 0, 
+      '__v': 0,
+    }); // exclude the _id and __v fields
+    };
+
+async function getFontFromIndex(index) {
+    return await fonts.findOne({ index: index }, {
+      '_id': 0, 
+      '__v': 0,
+
+    }); // exclude the _id and __v fields
+    };
+
+async function getSimilarFontsFromEmbedding(embedding, numCandidates, limit) {
+    
+
+    const fontCandidates = await mongoVectorSearch(embedding, numCandidates, limit);
+
+    console.log(fontCandidates);
+
+    return fontCandidates;
+
+}
   
 async function saveFont(font) {
   try {
@@ -61,4 +89,7 @@ async function saveFont(font) {
 module.exports = {
     loadFontsData,
     getAllFonts,
+    getFontFromName,
+    getFontFromIndex,
+    getSimilarFontsFromEmbedding,
     };

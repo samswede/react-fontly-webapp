@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { collection } = require('../models/fonts.mongo');
 
 // this is only added here for our tests to work
 require('dotenv').config();
@@ -51,7 +52,39 @@ async function mongoDisconnect() {
     await mongoose.disconnect();
 }
 
+async function mongoVectorSearch(embedding, numCandidates, limit) {
+    try {
+        const collection = mongoose.connection.collection('fonts');
+
+        // Log the embedding to check its structure
+        console.log("Embedding:", embedding);
+
+        const fontCandidates = await collection.aggregate([
+            {
+              "$vectorSearch": {
+                "index": "default",
+                "path": "embedding",
+                "queryVector": embedding,
+                "numCandidates": numCandidates,
+                "limit": limit
+              }
+            }
+          ])
+        .toArray();
+
+        return fontCandidates;
+
+    } catch (err) {
+        console.error('Failed to vector search for similar fonts:', err.message);
+        // Rethrow the error or return a specific response
+        throw err; // or throw err; // depending on your application's error handling strategy
+    }
+}
+
+
+
 module.exports = {
     mongoConnect,
     mongoDisconnect,
+    mongoVectorSearch,
 };
