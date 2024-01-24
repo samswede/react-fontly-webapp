@@ -57,7 +57,7 @@ async function mongoVectorSearch(embedding, numCandidates, limit) {
         const collection = mongoose.connection.collection('fonts');
 
         // Log the embedding to check its structure
-        console.log("Embedding:", embedding);
+        //console.log("Embedding:", embedding);
 
         const fontCandidates = await collection.aggregate([
             {

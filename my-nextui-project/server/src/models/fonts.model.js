@@ -38,6 +38,17 @@ async function getAllFonts() {
     }); // exclude the _id and __v fields
     };
 
+async function getAllFontsNames() {
+    return await fonts.find({}, {
+      '_id': 0, 
+      '__v': 0,
+      'embedding': 0,
+      'description': 0,
+      'image': 0,
+    
+    }); // exclude the _id and __v fields
+    }
+
 async function getFontFromName(name) {
     return await fonts.findOne({ name: name }, {
       '_id': 0, 
@@ -62,6 +73,13 @@ async function getSimilarFontsFromEmbedding(embedding, numCandidates, limit) {
 
     return fontCandidates;
 
+}
+
+async function getSimilarFontsFromName(name, numCandidates, limit) {
+    const font = await getFontFromName(name);
+    const embedding = font.embedding;
+    const fontCandidates = await mongoVectorSearch(embedding, numCandidates, limit);
+    return fontCandidates;
 }
   
 async function saveFont(font) {
@@ -89,7 +107,9 @@ async function saveFont(font) {
 module.exports = {
     loadFontsData,
     getAllFonts,
+    getAllFontsNames,
     getFontFromName,
     getFontFromIndex,
     getSimilarFontsFromEmbedding,
+    getSimilarFontsFromName
     };

@@ -1,10 +1,16 @@
 const { getAllFonts,
+        getAllFontsNames,
         getFontFromName,
         getFontFromIndex,
-        getSimilarFontsFromEmbedding } = require('../../models/fonts.model');
+        getSimilarFontsFromEmbedding,
+        getSimilarFontsFromName } = require('../../models/fonts.model');
 
 async function httpGetAllFonts(req, res) {
     return res.status(200).json(await getAllFonts());
+}
+
+async function httpGetAllFontsNames(req, res) {
+    return res.status(200).json(await getAllFontsNames());
 }
 
 async function httpGetFontFromName(req, res) {
@@ -31,11 +37,28 @@ async function httpGetSimilarFontsFromEmbedding(req, res) {
     }
 }
 
+async function httpGetSimilarFontsFromName(req, res) {
+    try {
+        const name = req.body.name;
+        const numCandidates = req.body.numCandidates;
+        const limit = req.body.limit;
+        const fontCandidates = await getSimilarFontsFromName(name, numCandidates, limit);
+        return res.status(200).json(fontCandidates);
+    
+    } catch(err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
+
 
 
 module.exports = {
     httpGetAllFonts,
+    httpGetAllFontsNames,
     httpGetFontFromName,
     httpGetFontFromIndex,
-    httpGetSimilarFontsFromEmbedding
+    httpGetSimilarFontsFromEmbedding,
+    httpGetSimilarFontsFromName,
 };
