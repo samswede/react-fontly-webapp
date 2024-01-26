@@ -22,7 +22,17 @@
     align-items: center;
     justify-content: center;
     width: 90vw;
-    height: 3rem;
+    height: 10vh;
+
+}
+
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    height: 60vh;
 
 }
 

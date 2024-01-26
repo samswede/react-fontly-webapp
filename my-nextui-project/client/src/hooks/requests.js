@@ -1,13 +1,31 @@
-/*
-// before we were using docker...
+
+// before using docker in development...
 const API_URL = 'http://localhost:8000/v1'; // v1 API route.
-*/
+
+/*
 // less specific when using docker...
 const API_URL = 'v1';
-
+*/
 // Load fonts and return as JSON.
 async function httpGetFonts() {
-  const response = await fetch(`${API_URL}/fonts`)
+  const response = await fetch(`${API_URL}/fonts/all-names`)
+  
+  return await response.json();
+}
+
+// Get similar fonts by name
+async function httpGetSimilarFontsFromName(name, numCandidates, limit) {
+  const response = await fetch(`${API_URL}/fonts/query-name`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: name,
+      numCandidates: numCandidates,
+      limit: limit,
+    }),
+  });
   
   return await response.json();
 }
@@ -36,5 +54,6 @@ async function httpSketchSearch(sketch) {
 
 export {
   httpGetFonts,
+  httpGetSimilarFontsFromName,
   httpSketchSearch,
 };

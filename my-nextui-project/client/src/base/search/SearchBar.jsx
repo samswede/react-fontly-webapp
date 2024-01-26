@@ -12,26 +12,17 @@ export default function SearchBar({value, setValue}) {
         setValue(newValue); // Update the state with the new value
     };
     return (
-        <Select
-            label="Select a font"
-
+        <Select 
+            label="Select a Font" 
+            selectedKeys={font}
             className="max-w-xs"
-            selectedKeys={value}
-            onSelectionChange={handleSelectionChange}
-            >
-            <SelectItem 
-                //value={0}
-                >ABeeZee</SelectItem>
-            <SelectItem
-                //value={1}
-                >Abel</SelectItem>
-            <SelectItem
-                //value={2}
-                >Abhaya-Libre</SelectItem>
-            <SelectItem
-                //value={3}
-                >Aboreto</SelectItem>
-
+            onSelectionChange={setFont}
+        >
+            {fonts.map((font) => (
+            <SelectItem key={font.name} value={font.name}>
+                {font.name}
+            </SelectItem>
+            ))}
         </Select>
                 
     );
