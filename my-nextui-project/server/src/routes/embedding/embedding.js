@@ -94,6 +94,7 @@ router.post('/query-embedding', async (req, res) => {
     const prompt = `Based on this context: ${highestScoreDoc.description} \n\n Query: ${query} \n\n Answer:`
 
     const answer = await hitOpenAiApi(prompt)
+    
     console.log('answer: ', answer)
     res.send(answer)
   } catch (err) {

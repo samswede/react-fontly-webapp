@@ -5,30 +5,57 @@ const fonts = require('./fonts.mongo');
 
 const { mongoVectorSearch } = require('../services/mongo');
 
-function loadFontsData() {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path.join(__dirname, '..', '..', 'data', 'font_collection.json'), 'utf8', async (err, data) => {
-            if (err) {
-                console.error(err);
-                return reject(err);
-            }
 
-            try {
-                const fontsData = JSON.parse(data);
-                for (const font of fontsData) {
-                    await saveFont(font);
-                    //console.log(`Saved font ${font.name}`);
+
+function loadFontsData() {
+
+    if (areAllFontsLoaded()) {
+        return;
+    }
+
+    else {
+        console.log('Loading fonts...');
+
+        return new Promise((resolve, reject) => {
+            fs.readFile(path.join(__dirname, '..', '..', 'data', 'font_collection.json'), 'utf8', async (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return reject(err);
                 }
-                const countFontsFound = await getAllFonts();
-                console.log(`${countFontsFound.length} fonts found!`);
-                resolve();
-            } catch (parseErr) {
-                console.error(parseErr);
-                reject(parseErr);
-            }
+
+                try {
+                    const fontsData = JSON.parse(data);
+                    for (const font of fontsData) {
+                        await saveFont(font);
+                        //console.log(`Saved font ${font.name}`);
+                    }
+                    const countFontsFound = await getAllFonts();
+                    console.log(`${countFontsFound.length} fonts found!`);
+                    resolve();
+                } catch (parseErr) {
+                    console.error(parseErr);
+                    reject(parseErr);
+                }
+            });
         });
-    });
+    }
 }
+
+async function areAllFontsLoaded() {
+    const fontsAlreadyLoaded = await getAllFonts();
+
+    const numFontsAlreadyLoaded = fontsAlreadyLoaded.length;
+
+    console.log(`Number of fonts already loaded: ${numFontsAlreadyLoaded}`);
+
+    if (numFontsAlreadyLoaded > 914) {
+        console.log('All fonts are already loaded!');
+        return true;
+    } else {
+        console.log('Not all fonts are loaded!');
+        return false;
+    }
+};
 
 async function getAllFonts() {
     return await fonts.find({}, {
